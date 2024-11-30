@@ -3,6 +3,7 @@ package assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentServiceTest {
 
@@ -51,5 +52,21 @@ class StudentServiceTest {
         assertNotNull(actual);
         assertNotNull(actual, "Student is not found"); // with error message
         assertNotNull(actual, () -> "Student is not found"); // String supplier for error message
+    }
+
+    @Test
+    void testGetStudents_assert_equals() {
+        StudentService studentService = new StudentService();
+        Student expected = new Student(1, "Alice");
+        studentService.addStudent(expected);
+        Student actual = studentService.getStudentById(1);
+
+        assertEquals(1, actual.getId());
+        assertEquals("Alice", actual.getName());
+        assertEquals(expected, actual);
+
+        assertEquals("Alice", actual.getName(), "Student is not found"); // with error message
+        assertEquals(expected, actual, () -> "Student is not found"); // String supplier for error message
+
     }
 }
