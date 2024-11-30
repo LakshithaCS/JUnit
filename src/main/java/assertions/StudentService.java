@@ -34,4 +34,11 @@ public class StudentService {
                 .orElse(null);
     }
 
+    public String[] getStudentNames(String department) {
+        return students.stream()
+                .filter(student -> department.equals(student.getDepartment()))
+                .map(Student::getName)
+                .toArray(String[]::new);
+    }
+
 }
