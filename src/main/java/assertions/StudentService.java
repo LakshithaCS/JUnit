@@ -41,4 +41,11 @@ public class StudentService {
                 .toArray(String[]::new);
     }
 
+    public List<String> getStudentNamesAsList(String department) {
+        return students.stream()
+                .filter(student -> department.equals(student.getDepartment()))
+                .map(Student::getName)
+                .toList();
+    }
+
 }

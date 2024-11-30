@@ -2,6 +2,9 @@ package assertions;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -100,5 +103,22 @@ class StudentServiceTest {
         assertArrayEquals(expected, actual);
         assertArrayEquals(expected, actual, "Student names are not equal"); // with error message
         assertArrayEquals(expected, actual, () -> "Student names are not equal"); // String supplier for error message
+    }
+
+    @Test
+    void testGetStudents_assert_iterable_equals() {
+        StudentService studentService = new StudentService();
+        Student alice = new Student(1, "Alice", "CS");
+        Student john = new Student(2, "John", "CS");
+        Student bob = new Student(3, "Bob", "EE");
+        studentService.addStudent(alice);
+        studentService.addStudent(john);
+        studentService.addStudent(bob);
+        List<String> expected = new ArrayList<>(List.of("Alice", "John"));
+        List<String> actual = studentService.getStudentNamesAsList("CS");
+
+        assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual, "Student names are not equal"); // with error message
+        assertIterableEquals(expected, actual, () -> "Student names are not equal"); // String supplier for error message
     }
 }
