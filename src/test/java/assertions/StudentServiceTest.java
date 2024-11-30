@@ -67,6 +67,21 @@ class StudentServiceTest {
 
         assertEquals("Alice", actual.getName(), "Student is not found"); // with error message
         assertEquals(expected, actual, () -> "Student is not found"); // String supplier for error message
+    }
 
+    @Test
+    void testGetStudents_assert_not_equals() {
+        StudentService studentService = new StudentService();
+        Student alice = new Student(1, "Alice");
+        Student john = new Student(2, "John");
+        studentService.addStudent(john);
+        Student actual = studentService.getStudentById(2);
+
+        assertNotEquals(1, actual.getId());
+        assertNotEquals("Alice", actual.getName());
+        assertNotEquals(alice, actual);
+
+        assertNotEquals("Alice", actual.getName(), "Student is not found"); // with error message
+        assertNotEquals(alice, actual, () -> "Student is not found"); // String supplier for error message
     }
 }
