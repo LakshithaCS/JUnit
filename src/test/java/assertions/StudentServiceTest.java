@@ -2,8 +2,7 @@ package assertions;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceTest {
 
@@ -31,5 +30,15 @@ class StudentServiceTest {
         assertFalse(() -> actual, "Student list is not empty"); // boolean supplier + with error message
         assertFalse(actual, () -> "Student list is not empty"); // String supplier for error message
         assertFalse(() -> actual, () -> "Student list is not empty"); // boolean supplier + String supplier for error message
+    }
+
+    @Test
+    void testGetStudents_assert_null() {
+        StudentService studentService = new StudentService();
+        Student actual = studentService.getStudentById(1);
+
+        assertNull(actual);
+        assertNull(actual, "Student is not null"); // with error message
+        assertNull(actual, () -> "Student is not null"); // String supplier for error message
     }
 }

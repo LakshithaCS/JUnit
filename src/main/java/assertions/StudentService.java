@@ -27,4 +27,11 @@ public class StudentService {
         return students;
     }
 
+    public Student getStudentById(int id) {
+        return students.stream()
+                .filter(student -> student.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
 }
