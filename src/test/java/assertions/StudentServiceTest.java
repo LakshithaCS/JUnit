@@ -41,4 +41,15 @@ class StudentServiceTest {
         assertNull(actual, "Student is not null"); // with error message
         assertNull(actual, () -> "Student is not null"); // String supplier for error message
     }
+
+    @Test
+    void testGetStudents_assert_not_null() {
+        StudentService studentService = new StudentService();
+        studentService.addStudent(new Student(1, "Alice"));
+        Student actual = studentService.getStudentById(1);
+
+        assertNotNull(actual);
+        assertNotNull(actual, "Student is not found"); // with error message
+        assertNotNull(actual, () -> "Student is not found"); // String supplier for error message
+    }
 }
