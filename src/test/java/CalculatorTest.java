@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -49,5 +50,15 @@ class CalculatorTest {
         ArithmeticException exception = assertThrows(ArithmeticException.class, () -> calculator.divide(6, 0));
 
         assertEquals("Cannot divide by zero", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Test divide method by zero")
+    @Disabled
+    void testDivideByZero_disabled() {
+        Calculator calculator = new Calculator();
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> calculator.divide(6, 0));
+
+        assertEquals("Cannot divide by zero ******", exception.getMessage());
     }
 }
