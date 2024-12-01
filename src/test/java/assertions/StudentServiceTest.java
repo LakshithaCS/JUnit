@@ -121,4 +121,22 @@ class StudentServiceTest {
         assertIterableEquals(expected, actual, "Student names are not equal"); // with error message
         assertIterableEquals(expected, actual, () -> "Student names are not equal"); // String supplier for error message
     }
+
+    @Test
+    public void testGetStudentByName_assert_throws() {
+        StudentService studentService = new StudentService();
+        Student alice = new Student(1, "Alice", "CS");
+        Student john = new Student(2, "John", "CS");
+        Student bob = new Student(3, "Bob", "EE");
+        studentService.addStudent(alice);
+        studentService.addStudent(john);
+        studentService.addStudent(bob);
+
+        // both works
+        assertThrows(StudentNotFoundException.class, () -> studentService.getStudentByName("Charlie"));
+        assertThrows(RuntimeException.class, () -> studentService.getStudentByName("Charlie"));
+
+        assertThrows(StudentNotFoundException.class, () -> studentService.getStudentByName("Charlie"), "Student not found"); // with error message
+        assertThrows(StudentNotFoundException.class, () -> studentService.getStudentByName("Charlie"), () -> "Student not found"); // String supplier for error message
+    }
 }

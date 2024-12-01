@@ -48,4 +48,11 @@ public class StudentService {
                 .toList();
     }
 
+    public Student getStudentByName(String name) {
+        return students.stream()
+                .filter(student -> name.equals(student.getName()))
+                .findFirst()
+                .orElseThrow(() -> new StudentNotFoundException("Student not found with name: " + name));
+    }
+
 }
